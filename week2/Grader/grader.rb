@@ -1,28 +1,36 @@
 # Create a class "Grader"
-class Grader:
-    def calcGrade(score):
-         if score >= 90:
-             return "A"
-         elif score >= 80:
-             return "B"
-         elif score >= 70:
-             return "C"
-         elif score >= 60: 
-             return "D"
-         else:
-             return "F"
- 
- # Ask the students name 
- name = input("What is the student's name? ")
- 
- # Ask for the assignment name 
- assignment = input("What is the assignment name? ")
- 
- # Ask for the grade in numbers 
- grade = float(input("What is the grade(in numbers)? "))
- 
- # Calculate the letter grade based on the numberical input 
- letterGrade = Grader.calcGrade(grade)
- 
- # Print the grade 
- print(f"{name} received an {letterGrade} on {assignment}")
+class Grader
+    # Create a method to identify the letter grade based on the numberical value provided by the user
+    def self.calcGrade(score)
+      if score >= 90
+        "A"
+      elsif score >= 80
+        "B"
+      elsif score >= 70
+        "C"
+      elsif score >= 60
+        "D"
+      else
+        "F"
+      end
+    end
+  end
+  
+  # Ask the student's name => Capture the response (CHOMP IT) and set the value to name
+  print "What is the student's name? "
+  name = gets.chomp
+  
+  # Ask for the assignment name => Capture the response (CHOMP IT) and set the value to assignment
+  print "What is the assignment name? "
+  assignment = gets.chomp
+  
+  # Ask for the grade in numbers => Capture the response (CHOMP IT) => Set the value to a float to allow for the input to be a decimal => and set the value to grade 
+  print "What is the grade (in numbers)? "
+  grade = gets.chomp.to_f
+  
+  # Calculate the letter grade based on the numerical input using the calcGrade method
+  letterGrade = Grader.calcGrade(grade)
+  
+  # Print the grade
+  puts "#{name} received an #{letterGrade} on #{assignment}"
+  
