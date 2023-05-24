@@ -1,0 +1,82 @@
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"></button>
+      <div>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <% if (pagename === "Home") { %>
+            <a class="nav-link" style="color: orange" href="/">Home</a>
+            <% } else { %>
+            <a class="nav-link" href="/">Home</a>
+            <% } %>
+          </li>
+          <li class="nav-item">
+            <% if (pagename === "About") { %>
+            <a class="nav-link" style="color: orange" href="/About">About</a>
+            <% } else { %>               
+            <a class="nav-link" href="/About">About</a>
+            <% } %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+    <!-- Create a div to hold the form  -->
+  <div>
+    <!-- Create a form  -->
+    <form action="/submit" method="POST">
+
+        <!-- Create a group for the first name  -->
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required><br>
+    
+        <!-- Create a group for the last name  -->
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required><br>
+    
+        <!-- Create a group for the address  -->
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required><br>
+    
+        <!-- Create a group for the city   -->
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" required><br>
+    
+        <!-- Create a group for the state  -->
+        <label for="state">State:</label>
+        <input type="text" id="state" name="state" required><br>
+    
+        <!-- Create a group for the zip code -->
+        <label for="zip">Zip:</label>
+        <input type="text" id="zip" name="zip" required><br>
+    
+        <!-- Create a group for the Age drop down -->
+        <label for="age">Age:</label>
+        <select id="age" name="age">
+          <option value="18-25">18-25</option>
+          <option value="26-35">26-35</option>
+          <option value="36-45">36-45</option>
+          <option value="46+">46+</option>
+        </select><br>
+    
+        <!-- Create a group for the gender as a radio option   -->
+        <label for="gender">Gender:</label>
+        <input type="radio" id="genderMale" name="gender" value="Male" required>
+        <label for="genderMale">Male</label>
+        <input type="radio" id="genderFemale" name="gender" value="Female" required>
+        <label for="genderFemale">Female</label><br>
+    
+        <!-- Create a group for the consent acknowledgement   -->
+        <input type="checkbox" id="consent" name="consent" required>
+        <label for="consent">I consent to the terms and conditions</label><br>
+    
+        <!-- Create a group for the bio text field   -->
+        <label for="bio">Bio:</label>
+        <textarea id="bio" name="bio" required></textarea><br>
+    
+        <!-- Add a submit button -->
+        <button type="submit">Submit</button>
+      </form>
+  </div>
