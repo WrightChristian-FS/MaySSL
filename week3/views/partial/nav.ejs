@@ -1,52 +1,45 @@
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="index.html">Start Bootstrap</a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"></button>
-      <div>
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <% if (pagename === "Home") { %>
-            <a class="nav-link" style="color: orange" href="/">Home</a>
-            <% } else { %>
-            <a class="nav-link" href="/">Home</a>
-            <% } %>
-          </li>
-          <li class="nav-item">
-            <% if (pagename === "About") { %>
-            <a class="nav-link" style="color: orange" href="/About">About</a>
-            <% } else { %> 
+<nav>
+  <div>
+    <a href="index.html">Start Bootstrap</a>
+    
+    <div>
+      <ul>
+        <li>
+          <%if (pagename =="Home"){$>
+            <a href="/"  style="color:orange"  id="index.html">Home</a>
+        <%} else { %>
+          <a href="/" id="index.html">Home</a>
+        }
+        </li>
 
-              
-              <div 
-              style ="z-index: 12;
-              display: block;
-              text-align: right;
-              background-color: #333a40; 
-              margin-right: 0px;
-              padding-right: 20px;
-              color: gray;
-              position: absolute;
-              width: 155px;
-              margin-top: 4px;
-              padding-top: 5px;
-              right: 0px;
-              border-radius: 10px;
-              padding: 11ox;
-              font-size: 12px;">
-              
-                <form action="/login" method="post">
-                  <input type="text" name="email" placeholder="email">
-                  <input type="text" name="password" placeholder="password">
-                  <input type="submit">
-              </form>
-              </div>
-              
-            <a class="nav-link" href="/About">About</a>
-            <% } %>
+        <li>
+
+          <%if (pagename =="About"){$>
+            <a href="/About" style="color:orange" >About</a>
+        <%} else { %>
+          <a href="/About" >About</a>
+        <%}%>
+        
+        if(typeif(sess) !="undefined" && sess.logged=="true") {%>
+        <a style="color:orange" href="/profile">Profile</a>
+        <a style="color:orange" href="/logout">Logout</a>}
           </li>
-        </ul>
-      </div>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
+
+<div>
+  <form action="/login" method="post">
+    
+    <input type="text" name="email" placeholder="Email">
+    <input type="text" name="password" placeholder="Password">
+    <input type="submit">
+    </form>
+  </div>
+
+  <% if (typeof (errors) != "undefinded") {%>
+    <% for (x in errors ) {%> 
+      <br><span>Errors:<%=errors[x]%></span>
   
- 
+  <%}}%>

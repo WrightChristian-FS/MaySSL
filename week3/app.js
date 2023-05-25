@@ -11,6 +11,11 @@ var bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+const session = require("express-session");
+app.use(session({secret:"secret", saveUninitialized:true, resave:true}));
+var sess; 
+
+
 let ejs = require("ejs");
 const router = express.Router();
 var app = express();
@@ -19,24 +24,69 @@ app.engine("ejs", require("ejs").__express);
 
 // Set up your routing
 router.get("/", function (req, res) {
-  res.render("index", { pagename: "Home" }); //Views/index.ejs
-});
+    sess = req.session; 
+  res.render("index", { pagename: "Home", sess:sess }); //Views/index.ejs
+}); 
+
+router.get("/profile", function(req, res){ 
+    sess = req.session; 
+    if(typeof(sess)=="undefinded" || sess.loggedin != true){ 
+        var errors = ["Not a authenticated user"]
+        res.render("index", {pagename: "Home", errors:errors })
+    } else { 
+        res.render("profile", {pagename: "Profile", sess:sess})
+    }
+})
+
+router.get("/logout", function(req,res){
+    sess = req.session; 
+    sess.destroy(function(err){
+        res.redirect("/"); 
+    })
+
+})
 
 router.get("/about", function (req, res) {
-  res.render("about", { pagename: "About" }); //views/about.ejs
+    sess = req.session; 
+  res.render("about", { pagename: "About", sess:sess }); //views/about.ejs
 });
 
 router.post("/login", function (req, res) {
-  console.log(req.body);
-  res.redirect("/");
   var errors = [];
+
+
+//   Verify that the email and password are not empty 
+  if(req.body.email ==""){
+    errors.push("Email is required")
+  }
+  if(req.body.passwor==""){
+    errors.push("Password is required")
+  }
+
+//   Check to see if the email or password are in correct. 
+  if (req.body.email !== "mike@aol.com" || req.body.password !== "abc123") {
+    errors.push("Invalid email or password");
+  }
+
+
+  // if the errrors length is greater than 0, shwo errors. otherwise show the session. 
+if (errors.length > 0 ) { 
+    res.render('index', {pagename: "Home", errors:errors})
+} else { 
+    req.session.loggedin = true; 
+    res.render('profile', {pagename:"Profile", sess: sess})
+}
+
+
+
+
+})
 
 router.post("/reg", function(req, res){ 
     res.redirect("/")
     var errors = []; 
-})
 
-// VAlidate to ensure that each field is not empty 
+    // VAlidate to ensure that each field is not empty 
   if (req.body.first === "") {
     errors.push("First Name is required");
   }
@@ -81,7 +131,9 @@ router.post("/reg", function(req, res){
   }
 
   res.render("index", { pagename: "Home", errors: errors }); //Views/index.ejs
-});
+
+})
+
 
 app.use(express.static("public"));
 app.use("/", router);
